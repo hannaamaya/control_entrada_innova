@@ -1,10 +1,17 @@
+package app;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -18,8 +25,9 @@ import javax.swing.event.ChangeEvent;
  *
  * @author Administrador
  */
-public class registros extends javax.swing.JFrame
-{
+public class registros extends javax.swing.JFrame{
+    //Generar el objeto cx de la calse Conexion
+    Conexion cx = new Conexion();
 
     /**
      * Creates new form registros
@@ -77,6 +85,11 @@ public class registros extends javax.swing.JFrame
 
         documento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         documento.setText("Digite su Documento");
+        documento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                documentoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ingrese su Documento");
 
@@ -162,16 +175,21 @@ public class registros extends javax.swing.JFrame
     }//GEN-LAST:event_entradaActionPerformed
 
     private void irActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irActionPerformed
-    Calendar fecha=new GregorianCalendar();
-    
-    String anho=Integer.toString(fecha.get(Calendar.YEAR));
-    String mes=Integer.toString(fecha.get(Calendar.MONTH));
-    String dia=Integer.toString(fecha.get(Calendar.DATE));
-    String hora=Integer.toString(fecha.get(Calendar.HOUR_OF_DAY));
-    String minuto=Integer.toString(fecha.get(Calendar.MINUTE));
-    
-    String fechacom= anho+"-"+mes+"-"+dia+"-"+hora+":"+minuto;
-    int documentoInt= Integer.parseInt(documento.getText());
+        //Consulta la información del trabajador y la alamacena
+        String[] trabajador = consultarTrabajador(documento.getText());
+        
+        Calendar fecha=new GregorianCalendar();
+
+        String anho=Integer.toString(fecha.get(Calendar.YEAR));
+        String mes=Integer.toString(fecha.get(Calendar.MONTH));
+        String dia=Integer.toString(fecha.get(Calendar.DATE));
+        String hora=Integer.toString(fecha.get(Calendar.HOUR_OF_DAY));
+        String minuto=Integer.toString(fecha.get(Calendar.MINUTE));
+
+        String fechacom= anho+"-"+mes+"-"+dia;
+        String horaActual= hora+":"+minuto+":00";
+        int documentoInt= Integer.parseInt(documento.getText());
+        
         if(this.entrada.isSelected()){
         if (documento.getText()!= "" && documentoInt>=0){
         this.datosRegistro.setText("Entrada"+" Usuario: "+this.documento.getText()+" Hora de Registro: "+hora+":"+minuto);
@@ -183,7 +201,149 @@ public class registros extends javax.swing.JFrame
             }
         }
         
+        //Verifica que el trabajador exista para generar un registro o no
+        if(trabajador[0] != null){
+            guardarRegistro(documento.getText(),fechacom,horaActual);
+        }else{
+            JOptionPane.showMessageDialog(null, "UPS! No se pudo encontrar el trabajador");
+        }
     }//GEN-LAST:event_irActionPerformed
+
+    /*
+    * Consulta la información de un trabajador y la entrega en un arreglo
+    * String documento documento del trabajador a consultar
+    * Devulve la información del trabajador
+    */
+    private String[] consultarTrabajador(String documento){
+        try{
+            //Crear una nueva conexion a la base de datos
+            Connection con = cx.cadena_conexion();
+            ResultSet rs;
+            
+            //Consultar información del trabajador por su documento
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM trabajador WHERE documento = ?");
+            ps.setString(1, documento);
+            rs = ps.executeQuery();
+            
+            //LLena la información del trabajador en un arreglo con la información obtenida
+            String[] infoPersona = new String[7];
+            int rowCount = 0;
+            int codigoAcceso = -1;
+            while(rs.next()) {
+                rowCount++;
+                //llena el arreglo con la información del trabajador
+                infoPersona[0] = rs.getString("documento");
+                infoPersona[1] = rs.getString("primerNombre");
+                infoPersona[2] = rs.getString("segundoNombre");
+                infoPersona[3] = rs.getString("primerApellido");
+                infoPersona[4] = rs.getString("segundoApellido");
+                infoPersona[5] = rs.getString("edad");
+                infoPersona[6] = rs.getString("telefono");
+            }
+            
+            return infoPersona;
+        } catch(SQLException e){
+            String[] infoPersona = new String[7];
+            JOptionPane.showMessageDialog(null, e.toString());
+            return infoPersona;
+        }
+    }
+    
+    /*
+    * Permite registrar la salida o ingreso de un trabajador
+    * String documento Documento del trabajador
+    * String fecha Fecha de ingreso o salida del trabajador
+    * String hora Hora de ingreso o salida del trabajador
+    */
+    private void guardarRegistro(String documento, String fecha,String hora){
+        try{
+            //Crear una nueva conexion a la base de datos
+            Connection con = cx.cadena_conexion();
+            ResultSet rs;
+            
+            //Se genera la petición para consultar si el trabajador tiene un ingreso activo
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM accesos WHERE fk_trabajador = ? AND fecha_Salida IS NULL");
+            ps.setString(1, documento);
+            rs = ps.executeQuery();
+            
+            //Cuenta la cantidad de registros encontrados y guarda su codigo de acceso
+            int rowCount = 0;
+            int codigoAcceso = -1;
+            while(rs.next()) {
+                rowCount++;
+                codigoAcceso = rs.getInt("codigo_acceso");
+            }
+            
+            //Comprueba si tiene registros para registrar la salida o el ingreso
+            if(rowCount > 0 && codigoAcceso != -1){
+                //Genera el ingreso del trabajador
+                actualizarSalida(fecha, hora, codigoAcceso);
+            }else{
+                //Genera la salida del trabajador
+                generarIngreso(fecha, hora, documento);
+            }
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    /*
+    * Permite generar el registro de ingreso de una nueva persona
+    * String feha Fecha en la que sera actualizado el registro
+    * String hora Hora en la que sera actualizado el registro
+    * String documento Documento de la persona
+    */
+    private void generarIngreso(String fecha, String hora, String documento){
+        try{
+            //Crear una nueva conexion a la base de datos
+            Connection con = cx.cadena_conexion();
+            ResultSet rs;
+            
+            //Se genera la petición para actualizar un registro a la base de datos
+            PreparedStatement ps = con.prepareStatement("INSERT INTO accesos (fecha_ingreso, hora_ingreso, fk_trabajador) VALUES(?, ?, ?)");
+
+            //Añadir los campos que seran actualizados con la nueva información
+            ps.setString(1, fecha);
+            ps.setString(2, hora);
+            ps.setString(3, documento);
+
+            // ps.execute udate // se guardan
+            ps.executeUpdate();
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    /*
+    * Permite generar el registro de salida de una nueva persona
+    * String feha Fecha en la que sera actualizado el registro
+    * String hora Hora en la que sera actualizado el registro
+    * String codigo Codigo de acceso que sera actualizado
+    */
+    private void actualizarSalida(String fecha, String hora, int codigo){
+        try{
+            //Crear una nueva conexion a la base de datos
+            Connection con = cx.cadena_conexion();
+            ResultSet rs;
+            
+            //Se genera la petición para actualizar un registro a la base de datos
+            PreparedStatement ps = con.prepareStatement("UPDATE accesos SET fecha_Salida=?,hora_Salida=? WHERE codigo_acceso=?");
+
+            //Añadir los campos que seran actualizados con la nueva información
+            ps.setString(1, fecha);
+            ps.setString(2, hora);
+            ps.setInt(3, codigo);
+
+            //ejecuta la actualización del registro
+            ps.executeUpdate();
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    private void documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_documentoActionPerformed
 
     /**
      * @param args the command line arguments
