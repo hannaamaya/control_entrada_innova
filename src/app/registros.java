@@ -34,6 +34,7 @@ public class registros extends javax.swing.JFrame{
      */
     public registros() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -48,13 +49,14 @@ public class registros extends javax.swing.JFrame{
         panel1 = new java.awt.Panel();
         buttonGroup1 = new javax.swing.ButtonGroup();
         panel2 = new java.awt.Panel();
-        entrada = new javax.swing.JRadioButton();
-        salida = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         documento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         ir = new javax.swing.JButton();
-        datosRegistro = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel4 = new javax.swing.JLabel();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -69,29 +71,19 @@ public class registros extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        buttonGroup1.add(entrada);
-        entrada.setSelected(true);
-        entrada.setText("Entrada");
-        entrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entradaActionPerformed(evt);
-            }
-        });
+        panel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
 
-        buttonGroup1.add(salida);
-        salida.setText("Salida");
-
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 15)); // NOI18N
         jLabel1.setText("Registro Entrada y Salida");
 
         documento.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        documento.setText("Digite su Documento");
         documento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 documentoActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Ingrese su Documento");
+        jLabel2.setText("Ingrese su Documento: ");
 
         ir.setText("IR");
         ir.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +92,19 @@ public class registros extends javax.swing.JFrame{
             }
         });
 
-        datosRegistro.setText("Usuario:                                   Hora de registro: ");
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 656, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 216, Short.MAX_VALUE)
+        );
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/WhatsApp Image 2022-06-29 at 10.44.57 AM (1).jpeg"))); // NOI18N
+        jLabel4.setText("jLabel4");
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -109,70 +113,94 @@ public class registros extends javax.swing.JFrame{
             .addGroup(panel2Layout.createSequentialGroup()
                 .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(840, 840, 840)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(datosRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                        .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(ir)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(ir))
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGap(295, 295, 295)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salida)
-                    .addComponent(entrada))
-                .addGap(18, 18, 18)
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(30, 30, 30)
-                .addComponent(ir)
-                .addGap(33, 33, 33)
-                .addComponent(datosRegistro)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(documento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ir)))
+                .addGap(278, 278, 278))
+            .addGroup(panel2Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("Registro Empleados");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jDesktopPane2.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
+        jDesktopPane2.setLayout(jDesktopPane2Layout);
+        jDesktopPane2Layout.setHorizontalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jDesktopPane2Layout.setVerticalGroup(
+            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane2Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jButton1)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 26, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void entradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_entradaActionPerformed
 
     private void irActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irActionPerformed
         //Consulta la información del trabajador y la alamacena
@@ -190,23 +218,16 @@ public class registros extends javax.swing.JFrame{
         String horaActual= hora+":"+minuto+":00";
         int documentoInt= Integer.parseInt(documento.getText());
         
-        if(this.entrada.isSelected()){
-        if (documento.getText()!= "" && documentoInt>=0){
-        this.datosRegistro.setText("Entrada"+" Usuario: "+this.documento.getText()+" Hora de Registro: "+hora+":"+minuto);
-        }
-            
-        }else if (this.salida.isSelected()){
-            if (documento.getText()!= "" && documentoInt>=0){
-            this.datosRegistro.setText("Salida"+" Usuario: "+this.documento.getText()+" Hora de Registro: "+hora+":"+minuto);
-            }
-        }
+      
         
         //Verifica que el trabajador exista para generar un registro o no
         if(trabajador[0] != null){
             guardarRegistro(documento.getText(),fechacom,horaActual);
+            JOptionPane.showMessageDialog(null, "Registro Guardado");
         }else{
             JOptionPane.showMessageDialog(null, "UPS! No se pudo encontrar el trabajador");
         }
+        
     }//GEN-LAST:event_irActionPerformed
 
     /*
@@ -342,8 +363,14 @@ public class registros extends javax.swing.JFrame{
     }
     
     private void documentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_documentoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_documentoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        registrosEmpleados registrosEmpleados= new registrosEmpleados();
+        registrosEmpleados.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,74 +410,28 @@ public class registros extends javax.swing.JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel datosRegistro;
     private javax.swing.JTextField documento;
-    private javax.swing.JRadioButton entrada;
     private javax.swing.JButton ir;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
-    private javax.swing.JRadioButton salida;
     // End of variables declaration//GEN-END:variables
 
 
-    public JRadioButton getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(JRadioButton entrada) {
-        this.entrada = entrada;
-    }
 
     public JButton getIr() {
-        return ir;
+        return ir;   
     }
 
     public void setIr(JButton ir) {
         this.ir = ir;
     }
 
-    public JRadioButton getSalida() {
-        return salida;
-    }
-
-    public void setSalida(JRadioButton salida) {
-        this.salida = salida;
-    }
-
-    public registros(JRadioButton entrada, JButton ir, JRadioButton salida) {
-        this.entrada = entrada;
-        this.ir = ir;
-        this.salida = salida;
-    }
-
-    public registros(JLabel datosRegistro, JTextField documento) {
-        this.datosRegistro = datosRegistro;
-        this.documento = documento;
-    }
-
-    public JLabel getDatosRegistro() {
-        return datosRegistro;
-    }
-
-    public void setDatosRegistro(JLabel datosRegistro) {
-        this.datosRegistro = datosRegistro;
-    }
-
-    public JTextField getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(JTextField documento) {
-        this.documento = documento;
-    }
-    
-public void radioButton (ChangeEvent e){
-   if(this.entrada.isSelected()){
-   
-   }
-}
 }
  
     

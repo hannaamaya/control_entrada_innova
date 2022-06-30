@@ -12,6 +12,10 @@ import java.sql.DriverManager;
  * @author sebas
  */
 public class Conexion {
+
+    static Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     public Connection cadena_conexion(){
         //Permite almacenar la conección
         Connection cn = null;
@@ -22,7 +26,7 @@ public class Conexion {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             
             //Realizar el string de conexión a la base de datos
-            cn = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-C386PL9;databaseName=accesos_empleados;user=sa;password=12345;encrypt=true;trustServerCertificate=true");
+            cn = DriverManager.getConnection("jdbc:sqlserver://localhost;databaseName=accesos_empleados;user=sa;password=12345;encrypt=true;trustServerCertificate=true");
 
             System.out.println("Se conecto Correctamente");
         }catch (Exception e){
