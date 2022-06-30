@@ -1,4 +1,4 @@
-# control_entrada_innova desarrollado por: Sebatian Pabon Lopez y Hanna Katherin Amaya Rojas
+# control_entrada_innova desarrollado por: Sebatian Pabon Lopez y Hanna Katherine Amaya Rojas
 Proyecto Innova
 
 Este proyecto tiene como objetivo realizar el registro de control de entrada y salida de las personas de una empresa, su contenido se encuentra a continuación:
