@@ -8,8 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
- * @author sebas
+ * Permite realizar la conexión a la base de datos
+ * @author Hanna Ketherin Amaya Rojas, Sebastian Pabon Lopez
  */
 public class Conexion {
 

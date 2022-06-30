@@ -1,8 +1,5 @@
 package app;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,11 +7,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,8 +15,8 @@ import javax.swing.event.ChangeEvent;
  */
 
 /**
- *
- * @author Administrador
+ * Interfaz para manejar el registro de las personas en la base de datos
+ * @author Hanna Ketherin Amaya Rojas, Sebastian Pabon Lopez
  */
 public class registros extends javax.swing.JFrame{
     //Generar el objeto cx de la calse Conexion

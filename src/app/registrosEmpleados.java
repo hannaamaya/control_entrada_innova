@@ -19,8 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 /**
- *
- * @author Administrador
+ * Interfaz para registrar la información de las personas
+ * @author Hanna Ketherin Amaya Rojas, Sebastian Pabon Lopez
  */
 public class registrosEmpleados extends javax.swing.JFrame {
     //Generar el objeto cx de la calse Conexion
